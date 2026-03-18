@@ -1,0 +1,262 @@
+/* ── Reset & Base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;600&display=swap');
+
+body {
+  background: #0F1117;
+  color: #E8EAF0;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+header {
+  background: #1A1D27;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.5rem;
+  color: #00C896;
+  letter-spacing: 0.04em;
+}
+
+header p {
+  color: #7B8099;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: #7B8099;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+nav a:hover {
+  color: #E8EAF0;
+  border-color: rgba(255,255,255,0.1);
+}
+
+nav a.active {
+  color: #00C896;
+  border-color: #00C896;
+}
+
+/* ── Main ─────────────────────────────────────────────────────── */
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ── Upload Section ───────────────────────────────────────────── */
+.upload-section {
+  background: #1A1D27;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.upload-label span {
+  font-size: 0.85rem;
+  color: #7B8099;
+}
+
+.upload-label input {
+  background: #0F1117;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 0.5rem;
+  color: #E8EAF0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn {
+  background: #00C896;
+  color: #0F1117;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn:hover { opacity: 0.85; }
+
+/* ── Stat Cards ───────────────────────────────────────────────── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #1A1D27;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+}
+
+.label {
+  font-size: 0.72rem;
+  color: #7B8099;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.value {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2rem;
+  margin-top: 0.2rem;
+}
+
+.green  { color: #00C896; }
+.red    { color: #FF4C4C; }
+.amber  { color: #FFA500; }
+.blue   { color: #4A90D9; }
+
+/* ── Warning Banner ───────────────────────────────────────────── */
+.warning-banner {
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  color: #FFA500;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+/* ── Charts ───────────────────────────────────────────────────── */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-full {
+  margin-bottom: 1.5rem;
+}
+
+.chart-full h2, .chart-grid h2 {
+  font-size: 0.8rem;
+  color: #7B8099;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.chart-card {
+  background: #1A1D27;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+/* ── Table ────────────────────────────────────────────────────── */
+.table-section {
+  margin-bottom: 2rem;
+}
+
+.table-section h2 {
+  font-size: 0.8rem;
+  color: #7B8099;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  background: #1A1D27;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead tr {
+  background: rgba(255,255,255,0.04);
+}
+
+th {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  color: #7B8099;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #E8EAF0;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+td.pass    { color: #00C896; font-weight: 600; }
+td.fail    { color: #FF4C4C; font-weight: 600; }
+td.warning { color: #FFA500; font-weight: 600; }
+td.ok      { color: #00C896; }
+
+td.rating-excellent   { color: #00C896; font-weight: 600; }
+td.rating-capable     { color: #4A90D9; font-weight: 600; }
+td.rating-marginal    { color: #FFA500; font-weight: 600; }
+td.rating-not-capable { color: #FF4C4C; font-weight: 600; }
+
+/* ── Footer ───────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #7B8099;
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 2rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .chart-grid { grid-template-columns: 1fr; }
+  .upload-section { flex-direction: column; align-items: stretch; }
+}

@@ -4,24 +4,21 @@ echo.
 
 call venv\Scripts\activate
 
-pyinstaller --noconfirm --windowed ^
+pyinstaller --noconfirm --onefile --windowed ^
     --name "CMM_Dashboard" ^
     --add-data "app.py;." ^
-    --add-data "models.py;." ^
-    --add-data "parser.py;." ^
-    --add-data "evaluator.py;." ^
-    --add-data "visualizer.py;." ^
-    --add-data "trend.py;." ^
-    --add-data "capability.py;." ^
-    --hidden-import streamlit ^
-    --hidden-import streamlit.web.cli ^
-    --hidden-import streamlit.runtime ^
+    --add-data "templates;templates" ^
+    --add-data "static;static" ^
+    --add-data "src;src" ^
+    --hidden-import flask ^
     --hidden-import pandas ^
     --hidden-import plotly ^
     --hidden-import statistics ^
-    --collect-all streamlit ^
+    --collect-all flask ^
+    --collect-all jinja2 ^
+    --collect-all werkzeug ^
     launcher.py
 
 echo.
-echo Done! Your app is in the dist\CMM_Dashboard folder.
+echo Done! Your executable is in the dist\ folder.
 pause

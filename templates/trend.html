@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Upload Form -->
+<section class="upload-section">
+  <form method="POST" enctype="multipart/form-data" action="/trend">
+    <label class="upload-label">
+      <span>Upload Multiple MODUS Reports (CSV or TXT)</span>
+      <input type="file" name="report_files" accept=".csv,.txt"
+             multiple required/>
+    </label>
+    <button type="submit" class="btn">Analyze Trends</button>
+  </form>
+</section>
+
+{% if runs %}
+
+<!-- Stat Cards -->
+<section class="stats">
+  <div class="card">
+    <div class="label">Total Runs</div>
+    <div class="value blue">{{ total_runs }}</div>
+  </div>
+  <div class="card">
+    <div class="label">Features Tracked</div>
+    <div class="value blue">{{ total_features }}</div>
+  </div>
+  <div class="card">
+    <div class="label">Trending Features</div>
+    <div class="value {{ 'amber' if trending_count > 0 else 'green' }}">
+      {{ trending_count }}
+    </div>
+  </div>
+</section>
+
+{% if trending_names %}
+<section class="warning-banner">
+  ⚠ Trending toward failure: {{ trending_names | join(", ") }}
+</section>
+{% endif %}
+
+<!-- Charts -->
+<section class="chart-full">
+  <h2>Deviation Trend</h2>
+  <div class="chart-card">{{ trend_chart | safe }}</div>
+</section>
+
+<section class="chart-grid">
+  <div>
+    <h2>Feature Stability</h2>
+    <div class="chart-card">{{ stability_chart | safe }}</div>
+  </div>
+  <div>
+    <h2>Pass Rate by Run</h2>
+    <div class="chart-card">{{ pass_rate_chart | safe }}</div>
+  </div>
+</section>
+
+<section class="chart-full">
+  <h2>Process Capability</h2>
+  <div class="chart-card">{{ cap_chart | safe }}</div>
+</section>
+
+<!-- Capability Table -->
+<section class="table-section">
+  <h2>Capability Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Type</th>
+        <th>n</th>
+        <th>Mean Dev</th>
+        <th>Std Dev</th>
+        <th>Cp</th>
+        <th>Cpk</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in cap_results %}
+      <tr class="{{ r.rating | lower | replace(' ', '-') }}">
+        <td>{{ r.feature_name }}</td>
+        <td>{{ r.feature_type }}</td>
+        <td>{{ r.sample_count }}</td>
+        <td>{{ "%.4f" | format(r.mean) }}</td>
+        <td>{{ "%.4f" | format(r.std_dev) }}</td>
+        <td>{{ r.cp }}</td>
+        <td>{{ r.cpk }}</td>
+        <td class="rating-{{ r.rating | lower | replace(' ', '-') }}">
+          {{ r.rating }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+{% endif %}
+{% endblock %}

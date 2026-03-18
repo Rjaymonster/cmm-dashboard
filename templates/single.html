@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Upload Form -->
+<section class="upload-section">
+  <form method="POST" enctype="multipart/form-data" action="/">
+    <label class="upload-label">
+      <span>Upload MODUS Report (CSV or TXT)</span>
+      <input type="file" name="report_file" accept=".csv,.txt" required/>
+    </label>
+    <button type="submit" class="btn">Analyze Report</button>
+  </form>
+</section>
+
+{% if results %}
+
+<!-- Stat Cards -->
+<section class="stats">
+  <div class="card">
+    <div class="label">Total Features</div>
+    <div class="value blue">{{ total }}</div>
+  </div>
+  <div class="card">
+    <div class="label">Passed</div>
+    <div class="value green">{{ passes }}</div>
+  </div>
+  <div class="card">
+    <div class="label">Failed</div>
+    <div class="value red">{{ fails }}</div>
+  </div>
+  <div class="card">
+    <div class="label">Warnings</div>
+    <div class="value amber">{{ warnings }}</div>
+  </div>
+  <div class="card">
+    <div class="label">Pass Rate</div>
+    <div class="value {{ 'green' if pass_rate >= 80 else 'amber' }}">
+      {{ pass_rate }}%
+    </div>
+  </div>
+</section>
+
+<!-- Charts -->
+<section class="chart-grid">
+  <div class="chart-card">{{ donut_chart | safe }}</div>
+  <div class="chart-card">{{ type_chart | safe }}</div>
+</section>
+
+<section class="chart-full">
+  <div class="chart-card">{{ dev_chart | safe }}</div>
+</section>
+
+<section class="chart-full">
+  <div class="chart-card">{{ usage_chart | safe }}</div>
+</section>
+
+<!-- Table -->
+<section class="table-section">
+  <h2>Raw Data</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Type</th>
+        <th>Condition</th>
+        <th>Deviation</th>
+        <th>Stated Tol</th>
+        <th>Bonus</th>
+        <th>Effective Tol</th>
+        <th>Tol Used %</th>
+        <th>Status</th>
+        <th>Severity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+      <tr class="{{ r.severity | lower }}">
+        <td>{{ r.feature_name }}</td>
+        <td>{{ r.feature_type }}</td>
+        <td>{{ r.material_condition }}</td>
+        <td>{{ "%.4f" | format(r.deviation) }}</td>
+        <td>{{ "%.4f" | format(r.upper_tolerance) }}</td>
+        <td>{{ "%.4f" | format(r.bonus_tolerance) if r.has_bonus else "-" }}</td>
+        <td>{{ "%.4f" | format(r.effective_upper) }}</td>
+        <td>{{ "%.1f" | format(r.percent_used) }}%</td>
+        <td class="{{ r.status | lower }}">{{ r.status }}</td>
+        <td class="{{ r.severity | lower }}">{{ r.severity }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+{% endif %}
+{% endblock %}
