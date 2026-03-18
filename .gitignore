@@ -1,0 +1,19 @@
+# Virtual environment
+venv/
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp files
+tmp_*.csv
+
+# OS files
+.DS_Store
+Thumbs.db

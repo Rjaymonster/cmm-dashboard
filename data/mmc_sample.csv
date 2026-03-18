@@ -1,0 +1,8 @@
+Feature Name,Feature Type,Nominal,Upper Tolerance,Lower Tolerance,Actual,Deviation,Material Condition,MMC/LMC Size,Actual Size
+POS1,Position,0.0,0.1,-0.1,0.11,0.11,MMC,25.0,24.98
+POS2,Position,0.0,0.1,-0.1,0.08,0.08,RFS,,
+PERP1,Perpendicularity,0.0,0.04,-0.04,0.052,0.052,MMC,10.0,9.97
+PAR1,Parallelism,0.0,0.03,-0.03,0.038,0.038,MMC,15.0,14.97
+ANG1,Angularity,0.0,0.05,-0.05,0.061,0.061,MMC,20.0,19.96
+STR1,Straightness,0.0,0.025,-0.025,0.031,0.031,LMC,8.0,8.04
+DIA1,Diameter,25.0,0.05,-0.05,25.038,0.038,RFS,,

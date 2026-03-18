@@ -1,0 +1,15 @@
+Feature Name,Feature Type,Nominal,Upper Tolerance,Lower Tolerance,Actual,Deviation
+CIR1,Circularity,0.0,0.05,-0.05,0.015015,0.015015
+CYL1,Cylindricity,0.0,0.04,-0.04,0.019368,0.019368
+FLAT1,Flatness,0.0,0.03,-0.03,0.011042,0.011042
+STR1,Straightness,0.0,0.025,-0.025,0.018081,0.018081
+POS1,Position,0.0,0.1,-0.1,0.035835,0.035835
+CON1,Concentricity,0.0,0.06,-0.06,0.030884,0.030884
+DIA1,Diameter,25.0,0.05,-0.05,25.005448,0.005448
+ANG1,Angularity,0.0,0.05,-0.05,0.019232,0.019232
+PERP1,Perpendicularity,0.0,0.04,-0.04,0.020567,0.020567
+PAR1,Parallelism,0.0,0.03,-0.03,0.01712,0.01712
+RUN1,Runout,0.0,0.05,-0.05,0.031137,0.031137
+TRUN1,Total Runout,0.0,0.06,-0.06,0.028603,0.028603
+POL1,Profile of a Line,0.0,0.08,-0.08,0.024593,0.024593
+POS2,Profile of a Surface,0.0,0.1,-0.1,0.058326,0.058326

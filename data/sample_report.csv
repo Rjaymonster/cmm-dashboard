@@ -1,0 +1,6 @@
+Feature Name,Feature Type,Nominal,Upper Tolerance,Lower Tolerance,Actual,Deviation
+CIR1,Circularity,0.0,0.05,-0.05,0.032,0.032
+PLANE1,Flatness,0.0,0.03,-0.03,0.028,0.028
+POS1,Position,0.0,0.1,-0.1,0.112,0.112
+DIA1,Diameter,25.0,0.05,-0.05,25.038,0.038
+DIA2,Diameter,50.0,0.025,-0.025,50.031,0.031
