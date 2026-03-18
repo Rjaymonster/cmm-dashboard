@@ -45,8 +45,8 @@ st.markdown("---")
 if mode == "Single Report":
 
     uploaded_file = st.file_uploader(
-        "Upload MODUS CSV Report",
-        type=["csv"],
+        "Upload MODUS Report (CSV or TXT)",
+        type=["csv", "txt"],
     )
 
     if uploaded_file is None:
@@ -119,8 +119,8 @@ if mode == "Single Report":
 else:
 
     uploaded_files = st.file_uploader(
-        "Upload Multiple MODUS CSV Reports",
-        type=["csv"],
+        "Upload Multiple MODUS Reports (CSV or TXT)",
+        type=["csv", "txt"],
         accept_multiple_files=True,
     )
 
