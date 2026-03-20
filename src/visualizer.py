@@ -2,17 +2,31 @@ import plotly.graph_objects as go
 from evaluator import EvaluationResult
 
 # Central color palette - keeps all charts visually consistent
-COLORS = {
+DEFAULT_COLORS = {
     "pass":       "#00C896",
     "fail":       "#FF4C4C",
     "warning":    "#FFA500",
     "nominal":    "#4A90D9",
+    "band":       "rgba(74, 144, 217, 0.12)",
     "background": "#0F1117",
     "surface":    "#1A1D27",
     "text":       "#E8EAF0",
     "subtext":    "#7B8099",
-    "grid":       "rgba(255,255,255,0.06)"
+    "grid":       "rgba(255,255,255,0.06)",
 }
+
+# Keep COLORS as an alias so existing code still works
+COLORS = DEFAULT_COLORS.copy()
+
+def get_colors(custom: dict = None) -> dict:
+    """
+    Returns the color palette merged with any custom overrides.
+    Custom dict can contain any subset of color keys.
+    """
+    colors = DEFAULT_COLORS.copy()
+    if custom:
+        colors.update(custom)
+    return colors
 
 def _severity_color(severity: str) -> str:
     """Return the right color for a given severity level."""
@@ -22,7 +36,8 @@ def _severity_color(severity: str) -> str:
         "FAIL": COLORS["fail"],
     }.get(severity, COLORS["subtext"])
 
-def deviation_bar_chart(results: list) -> go.Figure:
+def deviation_bar_chart(results: list, colors: dict = None) -> go.Figure:
+    COLORS = get_colors(colors)
     """
     Horizontal bar chart showing deviation per feature.
     Colored by severity. Tolerance limits shown as markers.    
@@ -82,7 +97,8 @@ def deviation_bar_chart(results: list) -> go.Figure:
     
     return fig
 
-def tolerance_usage_chart(results: list) -> go.Figure:
+def tolerance_usage_chart(results: list, colors: dict = None) -> go.Figure:
+    COLORS = get_colors(colors)
     """
     Shows what percentage of the tolerance band each feature consumes.
     Flags features near or over the limit even if passing.
@@ -124,7 +140,8 @@ def tolerance_usage_chart(results: list) -> go.Figure:
 
     return fig
 
-def summary_donut(results: list) -> go.Figure:
+def summary_donut(results: list, colors: dict = None) -> go.Figure:
+    COLORS = get_colors(colors)
     """
     Donut chart summarizing OK / Warning /Fail counts.
     """
@@ -165,7 +182,8 @@ def summary_donut(results: list) -> go.Figure:
 
     return fig
 
-def feature_type_breakdown(results: list) -> go.Figure:
+def feature_type_breakdown(results: list, colors: dict = None) -> go.Figure:
+    COLORS = get_colors(colors)
     """
     Groups features by type and shows pass/fail counts.
     Helps spot systemic issues by feature type.
@@ -454,7 +472,8 @@ def pass_rate_trend_chart(runs: list) -> go.Figure:
 
     return fig
 
-def capability_chart(cap_results: list) -> go.Figure:
+def capability_chart(results: list, colors: dict = None) -> go.Figure:
+    COLORS = get_colors(colors)
     """
     Bar chart showing Cpk per feature colored by rating.
     Reference lines at 1.0, 1.33, and 1.67.

@@ -1,0 +1,16 @@
+B01002_OP10_INSPECTION
+18-Feb-2026 21:20
+(in),ACTUAL,NOMINAL,LO-TOL,HI-TOL,DEVIATION,GRAPHIC,ERROR,
+ 
+THE FOLLOWING OUTPUT IS TO FORCE THE FAIL SIGNAL AFTER THE PROGRAM HAS GONE INTO ERROR RECOVERY!
+Point:FORCE_FAIL
+Z-axis,0.3000,0.0000,+0.0000,+0.0000,0.3000,---+-->,0.3000,
+                                                                                          
+In Tolerance Count: 0
+Out Tolerance Count: 1
+Total Tolerance Count: 1
+Duration:,2,mins,11,secs,
+FAIL
+In:,0
+Out:,1
+End of Report

@@ -1,0 +1,5 @@
+<Sequence name="">
+<Record type="PtMeas" label="DATUM_A_SR_FRONT_POINT_ptmeas1">
+<Point><X>-0.504062</X><Y>2.244691</Y><Z>-4.108414</Z><ER>0.501470</ER></Point>
+</Record>
+</Sequence>

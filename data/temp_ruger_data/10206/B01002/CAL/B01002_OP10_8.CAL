@@ -1,0 +1,5 @@
+<Sequence name="">
+<Record type="PtMeas" label="CARTRIDGE_SEAT_DEPTH_ptmeas1">
+<Point><X>9.650138</X><Y>6.444554</Y><Z>-0.641698</Z><ER>0.500460</ER></Point>
+</Record>
+</Sequence>

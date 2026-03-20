@@ -1,0 +1,11 @@
+<Sequence name="">
+<Record type="PtMeas" label="DATUM_C_PLANE_ptmeas1">
+<Point><X>7.349303</X><Y>1.259650</Y><Z>0.500349</Z><ER>0.500460</ER></Point>
+</Record>
+<Record type="PtMeas" label="DATUM_C_PLANE_ptmeas2">
+<Point><X>1.705472</X><Y>10.429310</Y><Z>0.499806</Z><ER>0.500460</ER></Point>
+</Record>
+<Record type="PtMeas" label="DATUM_C_PLANE_ptmeas3">
+<Point><X>11.401462</X><Y>16.012725</Y><Z>0.505371</Z><ER>0.500460</ER></Point>
+</Record>
+</Sequence>

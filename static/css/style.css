@@ -114,6 +114,107 @@ main {
 
 .btn:hover { opacity: 0.85; }
 
+/* ── Settings Panel ───────────────────────────────────────────── */
+.upload-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  width: 100%;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #7B8099;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-secondary:hover {
+  color: #E8EAF0;
+  border-color: rgba(255,255,255,0.3);
+}
+
+.settings-panel {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.settings-title {
+  font-size: 0.75rem;
+  color: #7B8099;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.slider-row input[type="range"] {
+  flex: 1;
+  accent-color: #00C896;
+}
+
+.slider-row span {
+  font-family: 'Share Tech Mono', monospace;
+  color: #00C896;
+  min-width: 3rem;
+}
+
+.radio-group, .checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.radio-group label, .checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: #E8EAF0;
+  cursor: pointer;
+}
+
+.radio-group input, .checkbox-group input {
+  accent-color: #00C896;
+}
+
+.color-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.color-group label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: #7B8099;
+}
+
+.color-group input[type="color"] {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: none;
+}
+
 /* ── Stat Cards ───────────────────────────────────────────────── */
 .stats {
   display: grid;
@@ -260,3 +361,4 @@ footer {
   .chart-grid { grid-template-columns: 1fr; }
   .upload-section { flex-direction: column; align-items: stretch; }
 }
+

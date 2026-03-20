@@ -1,0 +1,5 @@
+<Sequence name="">
+<Record type="PtMeas" label="CHARGING_SLOT_FRONT_POINT_ptmeas1">
+<Point><X>1.189358</X><Y>9.635686</Y><Z>-8.317344</Z><ER>0.501470</ER></Point>
+</Record>
+</Sequence>

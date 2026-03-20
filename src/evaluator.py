@@ -33,6 +33,8 @@ class EvaluationResult:
 
     @property
     def severity(self) -> str:
+        if hasattr(self, '_severity_override'):
+            return self._severity_override
         if not self.is_pass:
             return "FAIL"
         if self.percent_used >= 75:
@@ -51,12 +53,20 @@ class BaseEvaluator:
     Contains the core evaluation logic that all feature types share.
     """
 
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature,
+                 warning_threshold: float = 75.0) -> EvaluationResult:
         """Evaluates a feature and returns an EvaluationResult."""
         is_pass      = feature.is_pass
         percent_used = self._percent_used(feature)
 
-        return EvaluationResult(
+        if not is_pass:
+            severity = "FAIL"
+        elif percent_used >= warning_threshold:
+            severity = "WARNING"
+        else:
+            severity = "OK"
+
+        result = EvaluationResult(
             feature_name=feature.name,
             feature_type=feature.feature_type,
             deviation=feature.measurement.deviation,
@@ -69,6 +79,10 @@ class BaseEvaluator:
             effective_upper=feature.effective_tolerance_upper,
             effective_lower=feature.effective_tolerance_lower,
         )
+
+        # Override severity with threshold-aware value
+        result._severity_override = severity
+        return result
     
     def _percent_used(self, feature: Feature) -> float:
         """
@@ -239,14 +253,15 @@ def get_evaluator(feature_type: str) -> BaseEvaluator:
     evaluator_class = EVALUATOR_MAP.get(key, DefaultEvaluator)
     return evaluator_class()
 
-def evaluate_report(report) -> list:
+def evaluate_report(report, warning_threshold: float = 75.0) -> list:
     """
-    Evaluates every feature in a report.
+    Evaluates all features in a report.
     Returns a list of EvaluationResult objects.
+    warning_threshold controls when a passing feature gets flagged.
     """
     results = []
     for feature in report.features:
         evaluator = get_evaluator(feature.feature_type)
-        result = evaluator.evaluate(feature)
+        result = evaluator.evaluate(feature, warning_threshold)
         results.append(result)
     return results

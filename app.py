@@ -29,6 +29,13 @@ from visualizer import (
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024  # 50MB max upload
 
+@app.after_request
+def add_no_cache(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
 
 def chart_html(fig) -> str:
     """Converts a Plotly figure to an HTML div string."""
@@ -45,6 +52,21 @@ def single_report():
         file = request.files.get("report_file")
 
         if file and file.filename:
+            # Read settings from form
+            warning_threshold = float(request.form.get("warning_threshold", 75))
+            status_filter     = request.form.get("status_filter", "all")
+            show_donut        = request.form.get("show_donut") == "1"
+            show_type         = request.form.get("show_type") == "1"
+            show_dev          = request.form.get("show_dev") == "1"
+            show_usage        = request.form.get("show_usage") == "1"
+
+            # Custom colors
+            custom_colors = {
+                "pass":    request.form.get("color_pass",    "#00C896"),
+                "fail":    request.form.get("color_fail",    "#FF4C4C"),
+                "warning": request.form.get("color_warning", "#FFA500"),
+            }
+
             # Save to temp file
             suffix = os.path.splitext(file.filename)[1]
             with tempfile.NamedTemporaryFile(
@@ -55,7 +77,15 @@ def single_report():
 
             try:
                 report  = load_report(tmp_path)
-                results = evaluate_report(report)
+                results = evaluate_report(report, warning_threshold)
+
+                # Apply status filter
+                if status_filter == "fail":
+                    results = [r for r in results if not r.is_pass]
+                elif status_filter == "warning":
+                    results = [r for r in results if r.severity == "WARNING"]
+                elif status_filter == "pass":
+                    results = [r for r in results if r.is_pass]
 
                 total    = len(results)
                 passes   = sum(1 for r in results if r.is_pass)
@@ -70,18 +100,26 @@ def single_report():
                     "fails":      fails,
                     "warnings":   warnings,
                     "pass_rate":  rate,
-                    "donut_chart": chart_html(summary_donut(results)),
-                    "type_chart":  chart_html(feature_type_breakdown(results)),
-                    "dev_chart":   chart_html(deviation_bar_chart(results)),
-                    "usage_chart": chart_html(tolerance_usage_chart(results)),
+                    "donut_chart":  chart_html(summary_donut(results, custom_colors))
+                                    if show_donut else "",
+                    "type_chart":   chart_html(feature_type_breakdown(results, custom_colors))
+                                    if show_type else "",
+                    "dev_chart":    chart_html(deviation_bar_chart(results, custom_colors))
+                                    if show_dev else "",
+                    "usage_chart":  chart_html(tolerance_usage_chart(results, custom_colors))
+                                    if show_usage else "",
+                    "show_donut":   show_donut,
+                    "show_type":    show_type,
+                    "show_dev":     show_dev,
+                    "show_usage":   show_usage,
+                    "warning_threshold": warning_threshold,
+                    "status_filter": status_filter,
                 })
 
             except Exception as e:
                 context["error"] = str(e)
             finally:
                 os.unlink(tmp_path)
-
-    return render_template("single.html", **context)
 
 
 # ── Multi-Run Trend Route ─────────────────────────────────────────
@@ -150,4 +188,4 @@ def trend():
 # ── Run the App ───────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)

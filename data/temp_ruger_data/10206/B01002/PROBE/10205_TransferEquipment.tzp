@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mspXMLTree>
+  <MachineInfo>
+    <HeadType>2</HeadType>
+    <HeadConnector>AutoJoint</HeadConnector>
+  </MachineInfo>
+  <Components name="Components">
+    <Component name="SM25-2_COMP">
+      <mspEquipment base="true">
+        <GUID>E34C4F52-91C7-4735-8EEC-C0AC1E05618C</GUID>
+      </mspEquipment>
+      <mspComponentPart number="0">
+        <PartNumber>A-2237-1112</PartNumber>
+        <Type>Module</Type>
+        <Part>SM25-2</Part>
+        <Azimuth>0</Azimuth>
+      </mspComponentPart>
+      <ValidCAxisCalibration>false</ValidCAxisCalibration>
+    </Component>
+    <Component name="SP25_BODY_COMP">
+      <mspEquipment base="true">
+        <GUID>D93C28D2-6EE1-4425-B99F-93071CA282A7</GUID>
+      </mspEquipment>
+      <mspComponentPart number="0">
+        <PartNumber>A-2237-1000</PartNumber>
+        <Type>Body</Type>
+        <Part>SP25</Part>
+        <Azimuth>0</Azimuth>
+      </mspComponentPart>
+      <ValidCAxisCalibration>false</ValidCAxisCalibration>
+    </Component>
+    <Component name="10205_TOOL_1_COMP">
+      <mspEquipment base="true">
+        <GUID>08975BA5-E34F-4537-9D7D-363B8C7AC5AD</GUID>
+      </mspEquipment>
+      <mspComponentPart number="0">
+        <PartNumber>A-2237-1702</PartNumber>
+        <Type>Holder</Type>
+        <Part>SH25-2A</Part>
+        <Azimuth>0</Azimuth>
+        <Connection number="0" part_connected="1"/>
+      </mspComponentPart>
+      <mspComponentPart number="1">
+        <PartNumber>A-5004-7592</PartNumber>
+        <Type>Extension</Type>
+        <Part>M3-M2 EXT L5 SS</Part>
+        <Azimuth>0</Azimuth>
+        <Connection number="0" part_connected="2"/>
+      </mspComponentPart>
+      <mspComponentPart number="2">
+        <PartNumber>A-5004-7586</PartNumber>
+        <Type>Extension</Type>
+        <Part>M2-M2 EXT L20 D3 SS</Part>
+        <Azimuth>0</Azimuth>
+        <Connection number="0" part_connected="3"/>
+      </mspComponentPart>
+      <mspComponentPart number="3">
+        <PartNumber>A-5000-3627</PartNumber>
+        <Type>Connector</Type>
+        <Part>M2 ACC CENTRE 5WAY</Part>
+        <Azimuth>0</Azimuth>
+        <Connection number="0" part_connected="4"/>
+        <Connection number="1" part_connected="5"/>
+        <Connection number="2" part_connected="-1"/>
+        <Connection number="3" part_connected="8"/>
+        <Connection number="4" part_connected="7"/>
+      </mspComponentPart>
+      <mspComponentPart number="8">
+        <PartNumber>A-5003-0035</PartNumber>
+        <Type>Stylus</Type>
+        <Part>M2 STY D1.5R L30 EWL25 D1TC</Part>
+        <Azimuth>0</Azimuth>
+      </mspComponentPart>
+      <mspComponentPart number="5">
+        <PartNumber>A-5004-7585</PartNumber>
+        <Type>Extension</Type>
+        <Part>M2-M2 EXT L10 D3 SS</Part>
+        <Azimuth>0</Azimuth>
+        <Connection number="0" part_connected="6"/>
+      </mspComponentPart>
+      <mspComponentPart number="6">
+        <PartNumber>A-5003-0033</PartNumber>
+        <Type>Stylus</Type>
+        <Part>M2 STY D1R L20 EWL12.5 D0.8TC</Part>
+        <Azimuth>0</Azimuth>
+      </mspComponentPart>
+      <mspComponentPart number="7">
+        <PartNumber>A-5003-0036</PartNumber>
+        <Type>Stylus</Type>
+        <Part>M2 STY D2R L30 EWL25 D1.5TC</Part>
+        <Azimuth>0</Azimuth>
+      </mspComponentPart>
+      <mspComponentPart number="4">
+        <PartNumber>A-5003-0033</PartNumber>
+        <Type>Stylus</Type>
+        <Part>M2 STY D1R L20 EWL12.5 D0.8TC</Part>
+        <Azimuth>0</Azimuth>
+      </mspComponentPart>
+      <ValidCAxisCalibration>false</ValidCAxisCalibration>
+    </Component>
+  </Components>
+  <Tools name="Tools">
+    <IppTool name="10205_TOOL_1">
+      <IPPXMLParams/>
+      <CanScan>true</CanScan>
+      <CreatedAsNoAssembly>false</CreatedAsNoAssembly>
+      <CanRUP>false</CanRUP>
+      <SupportsACM>false</SupportsACM>
+      <IsAlignable>false</IsAlignable>
+      <IsHeadTouchSupported>false</IsHeadTouchSupported>
+      <TipMGR>
+        <mspStylus name="Tip 1.20.1">
+          <NominalTipRadius>0.5</NominalTipRadius>
+          <NominalStylusLength>20</NominalStylusLength>
+          <mspVector name="StylusVector">
+            <I>0</I>
+            <J>0</J>
+            <K>-1</K>
+          </mspVector>
+          <mspVector name="StylusSecondaryVector">
+            <I>0</I>
+            <J>0</J>
+            <K>0</K>
+          </mspVector>
+          <mspCoordinate name="NominalOffset">
+            <X>0</X>
+            <Y>0</Y>
+            <Z>-201.525</Z>
+          </mspCoordinate>
+          <mspIPPPropCO name="Props">
+            <IPPProp name="Radius" type="mspIPPPropDouble" mask="1">
+              <Value>0.5</Value>
+            </IPPProp>
+          </mspIPPPropCO>
+          <IsDisc>false</IsDisc>
+          <AutoCalcReach>false</AutoCalcReach>
+          <Reach>0</Reach>
+          <ReachClearanceAngle>2</ReachClearanceAngle>
+          <DiscDepth>0</DiscDepth>
+          <HeadOrientationMGR>
+            <mspIPPHeadOrientation name="A0.0-B0.0">
+              <mspHeadOrientation base="true">
+                <CalibratedTipRadius>0.5</CalibratedTipRadius>
+                <ChangePosition>Use Default</ChangePosition>
+                <mspCoordinate name="NominalOffset">
+                  <X>0</X>
+                  <Y>0</Y>
+                  <Z>-201.525</Z>
+                </mspCoordinate>
+                <mspCoordinate name="CalibratedOffset">
+                  <X>0</X>
+                  <Y>0</Y>
+                  <Z>-201.525</Z>
+                </mspCoordinate>
+                <VerifiedRa>0</VerifiedRa>
+              </mspHeadOrientation>
+              <mspEquipment name="Equipment">
+                <SerialNumber/>
+                <GUID>6E321945-5572-4E64-9C87-9480C0A4E31F</GUID>
+              </mspEquipment>
+              <ToolFullName>10205_TOOL_1.1.20.1.A0.0-B0.0</ToolFullName>
+              <Alias>10205_TOOL_1.1.20.1.A0.0-B0.0</Alias>
+              <ToolFileName>10205_TOOL_1.1.20.1.A0.0-B0.0.prb</ToolFileName>
+              <mspCoordinate name="HeadZeroedNominalOffset">
+                <X>0</X>
+                <Y>0</Y>
+                <Z>-201.525</Z>
+              </mspCoordinate>
+              <LastCalPart/>
+              <LocateOnCal>false</LocateOnCal>
+              <NominalTipRadius>0.5</NominalTipRadius>
+              <CalibratedReach>0</CalibratedReach>
+              <mspIPPPropCO name="Props">
+                <IPPProp name="Name" type="mspIPPPropString">
+                  <Value>10205_TOOL_1.1.20.1.A0.0-B0.0</Value>
+                </IPPProp>
+                <IPPProp name="LastCalibrated" type="mspIPPPropString">
+                  <Value>Never</Value>
+                </IPPProp>
+                <IPPProp name="AvrRadius" type="mspIPPPropDouble" mask="1">
+                  <Value>0.5</Value>
+                </IPPProp>
+                <IPPProp name="ER" type="mspIPPPropDouble" mask="1">
+                  <Value>0.5</Value>
+                </IPPProp>
+                <IPPProp name="Offset" type="mspIPPPropCoordinate">
+                  <X>0</X>
+                  <Y>0</Y>
+                  <Z>-201.525</Z>
+                </IPPProp>
+                <IPPProp name="EOffset" type="mspIPPPropCoordinate">
+                  <X>0</X>
+                  <Y>0</Y>
+                  <Z>-201.525</Z>
+                </IPPProp>
+                <IPPProp name="AlignmentVolume" type="mspIPPPropAlignmentVolume">
+                  <Coordinate>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Z>201.525</Z>
+                  </Coordinate>
+                  <Radius>202.025</Radius>
+                </IPPProp>
+                <IPPProp name="Alignment" type="mspIPPPropAlignment">
+                  <Primary>
+                    <I>0</I>
+                    <J>0</J>
+                    <K>1</K>
+                  </Primary>
+                  <Secondary>
+                    <I>0</I>
+                    <J>-1</J>
+                    <K>0</K>
+                  </Secondary>
+                </IPPProp>
+                <IPPProp name="CollisionVolume" type="mspIPPPropCollisionVolume"/>
+                <IPPProp type="mspIPPPropCalQuality" name="RMSError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MinError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MaxError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="Form" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="ED" mask="33">
+                  <Act type="4">1</Act>
+                  <Min type="4">0.75</Min>
+                  <Max type="4">1.25</Max>
+                  <Def type="4">1</Def>
+                </IPPProp>
+              </mspIPPPropCO>
+              <mspHeadAngle base="true">
+                <A>0</A>
+                <B>0</B>
+                <C>0</C>
+                <mspCalibration name="Calibration">
+                  <Mask>68</Mask>
+                  <CalibrateTime>0</CalibrateTime>
+                  <ExpireTime>0</ExpireTime>
+                  <ExpireTime>0</ExpireTime>
+                  <FileName>C:\Program Files (x86)\Renishaw\UCC\UCCSERVER\UCCSERVER_56000\Machines\Machine34\Tools\10205_TOOL_1.1.20.1.A0.0-B0.0.prb</FileName>
+                  <RMSError>0</RMSError>
+                  <MinError>0</MinError>
+                  <MaxError>0</MaxError>
+                  <GeometricQuality>0</GeometricQuality>
+                  <VerifyDistance>0</VerifyDistance>
+                  <mspVector name="TriangulationVector">
+                    <I>0</I>
+                    <J>0</J>
+                    <K>0</K>
+                  </mspVector>
+                  <PhaseToHeightRMSError>0</PhaseToHeightRMSError>
+                  <NanCount>0</NanCount>
+                  <IlluminationIsLow>false</IlluminationIsLow>
+                </mspCalibration>
+              </mspHeadAngle>
+              <CalibrationParts/>
+            </mspIPPHeadOrientation>
+          </HeadOrientationMGR>
+          <IQInfo>
+            <HasIQCalibration>false</HasIQCalibration>
+            <IQTipRadius>0</IQTipRadius>
+            <IQPrbFile>NotSet</IQPrbFile>
+            <LastIQTime>Never</LastIQTime>
+          </IQInfo>
+        </mspStylus>
+        <mspStylus name="Tip 2.20.1">
+          <NominalTipRadius>0.5</NominalTipRadius>
+          <NominalStylusLength>20</NominalStylusLength>
+          <mspVector name="StylusVector">
+            <I>1</I>
+            <J>0</J>
+            <K>0</K>
+          </mspVector>
+          <mspVector name="StylusSecondaryVector">
+            <I>0</I>
+            <J>0</J>
+            <K>0</K>
+          </mspVector>
+          <mspCoordinate name="NominalOffset">
+            <X>33.75</X>
+            <Y>0</Y>
+            <Z>-176.025</Z>
+          </mspCoordinate>
+          <mspIPPPropCO name="Props">
+            <IPPProp name="Radius" type="mspIPPPropDouble" mask="1">
+              <Value>0.5</Value>
+            </IPPProp>
+          </mspIPPPropCO>
+          <IsDisc>false</IsDisc>
+          <AutoCalcReach>false</AutoCalcReach>
+          <Reach>0</Reach>
+          <ReachClearanceAngle>2</ReachClearanceAngle>
+          <DiscDepth>0</DiscDepth>
+          <HeadOrientationMGR>
+            <mspIPPHeadOrientation name="A0.0-B0.0">
+              <mspHeadOrientation base="true">
+                <CalibratedTipRadius>0.5</CalibratedTipRadius>
+                <ChangePosition>Use Default</ChangePosition>
+                <mspCoordinate name="NominalOffset">
+                  <X>33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </mspCoordinate>
+                <mspCoordinate name="CalibratedOffset">
+                  <X>33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </mspCoordinate>
+                <VerifiedRa>0</VerifiedRa>
+              </mspHeadOrientation>
+              <mspEquipment name="Equipment">
+                <SerialNumber/>
+                <GUID>14998146-32F6-4E4D-BDD7-1AE8660F8B4C</GUID>
+              </mspEquipment>
+              <ToolFullName>10205_TOOL_1.2.20.1.A0.0-B0.0</ToolFullName>
+              <Alias>10205_TOOL_1.2.20.1.A0.0-B0.0</Alias>
+              <ToolFileName>10205_TOOL_1.2.20.1.A0.0-B0.0.prb</ToolFileName>
+              <mspCoordinate name="HeadZeroedNominalOffset">
+                <X>33.75</X>
+                <Y>0</Y>
+                <Z>-176.025</Z>
+              </mspCoordinate>
+              <LastCalPart/>
+              <LocateOnCal>false</LocateOnCal>
+              <NominalTipRadius>0.5</NominalTipRadius>
+              <CalibratedReach>0</CalibratedReach>
+              <mspIPPPropCO name="Props">
+                <IPPProp name="Name" type="mspIPPPropString">
+                  <Value>10205_TOOL_1.2.20.1.A0.0-B0.0</Value>
+                </IPPProp>
+                <IPPProp name="LastCalibrated" type="mspIPPPropString">
+                  <Value>Never</Value>
+                </IPPProp>
+                <IPPProp name="AvrRadius" type="mspIPPPropDouble" mask="1">
+                  <Value>0.5</Value>
+                </IPPProp>
+                <IPPProp name="ER" type="mspIPPPropDouble" mask="1">
+                  <Value>0.5</Value>
+                </IPPProp>
+                <IPPProp name="Offset" type="mspIPPPropCoordinate">
+                  <X>33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </IPPProp>
+                <IPPProp name="EOffset" type="mspIPPPropCoordinate">
+                  <X>33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </IPPProp>
+                <IPPProp name="AlignmentVolume" type="mspIPPPropAlignmentVolume">
+                  <Coordinate>
+                    <X>-33.75</X>
+                    <Y>0</Y>
+                    <Z>176.025</Z>
+                  </Coordinate>
+                  <Radius>202.025</Radius>
+                </IPPProp>
+                <IPPProp name="Alignment" type="mspIPPPropAlignment">
+                  <Primary>
+                    <I>-1</I>
+                    <J>0</J>
+                    <K>0</K>
+                  </Primary>
+                  <Secondary>
+                    <I>0</I>
+                    <J>-0</J>
+                    <K>1</K>
+                  </Secondary>
+                </IPPProp>
+                <IPPProp name="CollisionVolume" type="mspIPPPropCollisionVolume"/>
+                <IPPProp type="mspIPPPropCalQuality" name="RMSError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MinError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MaxError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="Form" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="ED" mask="33">
+                  <Act type="4">1</Act>
+                  <Min type="4">0.75</Min>
+                  <Max type="4">1.25</Max>
+                  <Def type="4">1</Def>
+                </IPPProp>
+              </mspIPPPropCO>
+              <mspHeadAngle base="true">
+                <A>0</A>
+                <B>0</B>
+                <C>0</C>
+                <mspCalibration name="Calibration">
+                  <Mask>68</Mask>
+                  <CalibrateTime>0</CalibrateTime>
+                  <ExpireTime>0</ExpireTime>
+                  <ExpireTime>0</ExpireTime>
+                  <FileName>C:\Program Files (x86)\Renishaw\UCC\UCCSERVER\UCCSERVER_56000\Machines\Machine34\Tools\10205_TOOL_1.2.20.1.A0.0-B0.0.prb</FileName>
+                  <RMSError>0</RMSError>
+                  <MinError>0</MinError>
+                  <MaxError>0</MaxError>
+                  <GeometricQuality>0</GeometricQuality>
+                  <VerifyDistance>0</VerifyDistance>
+                  <mspVector name="TriangulationVector">
+                    <I>0</I>
+                    <J>0</J>
+                    <K>0</K>
+                  </mspVector>
+                  <PhaseToHeightRMSError>0</PhaseToHeightRMSError>
+                  <NanCount>0</NanCount>
+                  <IlluminationIsLow>false</IlluminationIsLow>
+                </mspCalibration>
+              </mspHeadAngle>
+              <CalibrationParts/>
+            </mspIPPHeadOrientation>
+          </HeadOrientationMGR>
+          <IQInfo>
+            <HasIQCalibration>false</HasIQCalibration>
+            <IQTipRadius>0</IQTipRadius>
+            <IQPrbFile>NotSet</IQPrbFile>
+            <LastIQTime>Never</LastIQTime>
+          </IQInfo>
+        </mspStylus>
+        <mspStylus name="Tip 3.30.1">
+          <NominalTipRadius>0.75</NominalTipRadius>
+          <NominalStylusLength>30</NominalStylusLength>
+          <mspVector name="StylusVector">
+            <I>-1</I>
+            <J>0</J>
+            <K>0</K>
+          </mspVector>
+          <mspVector name="StylusSecondaryVector">
+            <I>0</I>
+            <J>0</J>
+            <K>0</K>
+          </mspVector>
+          <mspCoordinate name="NominalOffset">
+            <X>-33.75</X>
+            <Y>0</Y>
+            <Z>-176.025</Z>
+          </mspCoordinate>
+          <mspIPPPropCO name="Props">
+            <IPPProp name="Radius" type="mspIPPPropDouble" mask="1">
+              <Value>0.75</Value>
+            </IPPProp>
+          </mspIPPPropCO>
+          <IsDisc>false</IsDisc>
+          <AutoCalcReach>false</AutoCalcReach>
+          <Reach>0</Reach>
+          <ReachClearanceAngle>2</ReachClearanceAngle>
+          <DiscDepth>0</DiscDepth>
+          <HeadOrientationMGR>
+            <mspIPPHeadOrientation name="A0.0-B0.0">
+              <mspHeadOrientation base="true">
+                <CalibratedTipRadius>0.75</CalibratedTipRadius>
+                <ChangePosition>Use Default</ChangePosition>
+                <mspCoordinate name="NominalOffset">
+                  <X>-33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </mspCoordinate>
+                <mspCoordinate name="CalibratedOffset">
+                  <X>-33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </mspCoordinate>
+                <VerifiedRa>0</VerifiedRa>
+              </mspHeadOrientation>
+              <mspEquipment name="Equipment">
+                <SerialNumber/>
+                <GUID>EEF3ECAF-4159-408E-B5D8-8E5571BD0BAD</GUID>
+              </mspEquipment>
+              <ToolFullName>10205_TOOL_1.3.30.1.A0.0-B0.0</ToolFullName>
+              <Alias>10205_TOOL_1.3.30.1.A0.0-B0.0</Alias>
+              <ToolFileName>10205_TOOL_1.3.30.1.A0.0-B0.0.prb</ToolFileName>
+              <mspCoordinate name="HeadZeroedNominalOffset">
+                <X>-33.75</X>
+                <Y>0</Y>
+                <Z>-176.025</Z>
+              </mspCoordinate>
+              <LastCalPart/>
+              <LocateOnCal>false</LocateOnCal>
+              <NominalTipRadius>0.75</NominalTipRadius>
+              <CalibratedReach>0</CalibratedReach>
+              <mspIPPPropCO name="Props">
+                <IPPProp name="Name" type="mspIPPPropString">
+                  <Value>10205_TOOL_1.3.30.1.A0.0-B0.0</Value>
+                </IPPProp>
+                <IPPProp name="LastCalibrated" type="mspIPPPropString">
+                  <Value>Never</Value>
+                </IPPProp>
+                <IPPProp name="AvrRadius" type="mspIPPPropDouble" mask="1">
+                  <Value>0.75</Value>
+                </IPPProp>
+                <IPPProp name="ER" type="mspIPPPropDouble" mask="1">
+                  <Value>0.75</Value>
+                </IPPProp>
+                <IPPProp name="Offset" type="mspIPPPropCoordinate">
+                  <X>-33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </IPPProp>
+                <IPPProp name="EOffset" type="mspIPPPropCoordinate">
+                  <X>-33.75</X>
+                  <Y>0</Y>
+                  <Z>-176.025</Z>
+                </IPPProp>
+                <IPPProp name="AlignmentVolume" type="mspIPPPropAlignmentVolume">
+                  <Coordinate>
+                    <X>33.75</X>
+                    <Y>0</Y>
+                    <Z>176.025</Z>
+                  </Coordinate>
+                  <Radius>202.275</Radius>
+                </IPPProp>
+                <IPPProp name="Alignment" type="mspIPPPropAlignment">
+                  <Primary>
+                    <I>1</I>
+                    <J>0</J>
+                    <K>0</K>
+                  </Primary>
+                  <Secondary>
+                    <I>0</I>
+                    <J>-0</J>
+                    <K>1</K>
+                  </Secondary>
+                </IPPProp>
+                <IPPProp name="CollisionVolume" type="mspIPPPropCollisionVolume"/>
+                <IPPProp type="mspIPPPropCalQuality" name="RMSError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MinError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MaxError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="Form" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="ED" mask="33">
+                  <Act type="4">1.5</Act>
+                  <Min type="4">1.125</Min>
+                  <Max type="4">1.875</Max>
+                  <Def type="4">1.5</Def>
+                </IPPProp>
+              </mspIPPPropCO>
+              <mspHeadAngle base="true">
+                <A>0</A>
+                <B>0</B>
+                <C>0</C>
+                <mspCalibration name="Calibration">
+                  <Mask>68</Mask>
+                  <CalibrateTime>0</CalibrateTime>
+                  <ExpireTime>0</ExpireTime>
+                  <ExpireTime>0</ExpireTime>
+                  <FileName>C:\Program Files (x86)\Renishaw\UCC\UCCSERVER\UCCSERVER_56000\Machines\Machine34\Tools\10205_TOOL_1.3.30.1.A0.0-B0.0.prb</FileName>
+                  <RMSError>0</RMSError>
+                  <MinError>0</MinError>
+                  <MaxError>0</MaxError>
+                  <GeometricQuality>0</GeometricQuality>
+                  <VerifyDistance>0</VerifyDistance>
+                  <mspVector name="TriangulationVector">
+                    <I>0</I>
+                    <J>0</J>
+                    <K>0</K>
+                  </mspVector>
+                  <PhaseToHeightRMSError>0</PhaseToHeightRMSError>
+                  <NanCount>0</NanCount>
+                  <IlluminationIsLow>false</IlluminationIsLow>
+                </mspCalibration>
+              </mspHeadAngle>
+              <CalibrationParts/>
+            </mspIPPHeadOrientation>
+          </HeadOrientationMGR>
+          <IQInfo>
+            <HasIQCalibration>false</HasIQCalibration>
+            <IQTipRadius>0</IQTipRadius>
+            <IQPrbFile>NotSet</IQPrbFile>
+            <LastIQTime>Never</LastIQTime>
+          </IQInfo>
+        </mspStylus>
+        <mspStylus name="Tip 4.30.2">
+          <NominalTipRadius>1</NominalTipRadius>
+          <NominalStylusLength>30</NominalStylusLength>
+          <mspVector name="StylusVector">
+            <I>0</I>
+            <J>-1</J>
+            <K>0</K>
+          </mspVector>
+          <mspVector name="StylusSecondaryVector">
+            <I>0</I>
+            <J>0</J>
+            <K>0</K>
+          </mspVector>
+          <mspCoordinate name="NominalOffset">
+            <X>0</X>
+            <Y>-33.75</Y>
+            <Z>-176.025</Z>
+          </mspCoordinate>
+          <mspIPPPropCO name="Props">
+            <IPPProp name="Radius" type="mspIPPPropDouble" mask="1">
+              <Value>1</Value>
+            </IPPProp>
+          </mspIPPPropCO>
+          <IsDisc>false</IsDisc>
+          <AutoCalcReach>false</AutoCalcReach>
+          <Reach>0</Reach>
+          <ReachClearanceAngle>2</ReachClearanceAngle>
+          <DiscDepth>0</DiscDepth>
+          <HeadOrientationMGR>
+            <mspIPPHeadOrientation name="A0.0-B0.0">
+              <mspHeadOrientation base="true">
+                <CalibratedTipRadius>1</CalibratedTipRadius>
+                <ChangePosition>Use Default</ChangePosition>
+                <mspCoordinate name="NominalOffset">
+                  <X>0</X>
+                  <Y>-33.75</Y>
+                  <Z>-176.025</Z>
+                </mspCoordinate>
+                <mspCoordinate name="CalibratedOffset">
+                  <X>0</X>
+                  <Y>-33.75</Y>
+                  <Z>-176.025</Z>
+                </mspCoordinate>
+                <VerifiedRa>0</VerifiedRa>
+              </mspHeadOrientation>
+              <mspEquipment name="Equipment">
+                <SerialNumber/>
+                <GUID>D9ECC566-72CC-4E80-BFD8-52F135B793B7</GUID>
+              </mspEquipment>
+              <ToolFullName>10205_TOOL_1.4.30.2.A0.0-B0.0</ToolFullName>
+              <Alias>10205_TOOL_1.4.30.2.A0.0-B0.0</Alias>
+              <ToolFileName>10205_TOOL_1.4.30.2.A0.0-B0.0.prb</ToolFileName>
+              <mspCoordinate name="HeadZeroedNominalOffset">
+                <X>0</X>
+                <Y>-33.75</Y>
+                <Z>-176.025</Z>
+              </mspCoordinate>
+              <LastCalPart/>
+              <LocateOnCal>false</LocateOnCal>
+              <NominalTipRadius>1</NominalTipRadius>
+              <CalibratedReach>0</CalibratedReach>
+              <mspIPPPropCO name="Props">
+                <IPPProp name="Name" type="mspIPPPropString">
+                  <Value>10205_TOOL_1.4.30.2.A0.0-B0.0</Value>
+                </IPPProp>
+                <IPPProp name="LastCalibrated" type="mspIPPPropString">
+                  <Value>Never</Value>
+                </IPPProp>
+                <IPPProp name="AvrRadius" type="mspIPPPropDouble" mask="1">
+                  <Value>1</Value>
+                </IPPProp>
+                <IPPProp name="ER" type="mspIPPPropDouble" mask="1">
+                  <Value>1</Value>
+                </IPPProp>
+                <IPPProp name="Offset" type="mspIPPPropCoordinate">
+                  <X>0</X>
+                  <Y>-33.75</Y>
+                  <Z>-176.025</Z>
+                </IPPProp>
+                <IPPProp name="EOffset" type="mspIPPPropCoordinate">
+                  <X>0</X>
+                  <Y>-33.75</Y>
+                  <Z>-176.025</Z>
+                </IPPProp>
+                <IPPProp name="AlignmentVolume" type="mspIPPPropAlignmentVolume">
+                  <Coordinate>
+                    <X>0</X>
+                    <Y>33.75</Y>
+                    <Z>176.025</Z>
+                  </Coordinate>
+                  <Radius>202.525</Radius>
+                </IPPProp>
+                <IPPProp name="Alignment" type="mspIPPPropAlignment">
+                  <Primary>
+                    <I>0</I>
+                    <J>1</J>
+                    <K>0</K>
+                  </Primary>
+                  <Secondary>
+                    <I>0</I>
+                    <J>-0</J>
+                    <K>1</K>
+                  </Secondary>
+                </IPPProp>
+                <IPPProp name="CollisionVolume" type="mspIPPPropCollisionVolume"/>
+                <IPPProp type="mspIPPPropCalQuality" name="RMSError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MinError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="MaxError" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">-1</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="Form" mask="33">
+                  <Act type="4">0</Act>
+                  <Min type="4">0</Min>
+                  <Max type="4">1</Max>
+                  <Def type="4">0</Def>
+                </IPPProp>
+                <IPPProp type="mspIPPPropCalQuality" name="ED" mask="33">
+                  <Act type="4">2</Act>
+                  <Min type="4">1.5</Min>
+                  <Max type="4">2.5</Max>
+                  <Def type="4">2</Def>
+                </IPPProp>
+              </mspIPPPropCO>
+              <mspHeadAngle base="true">
+                <A>0</A>
+                <B>0</B>
+                <C>0</C>
+                <mspCalibration name="Calibration">
+                  <Mask>68</Mask>
+                  <CalibrateTime>0</CalibrateTime>
+                  <ExpireTime>0</ExpireTime>
+                  <ExpireTime>0</ExpireTime>
+                  <FileName>C:\Program Files (x86)\Renishaw\UCC\UCCSERVER\UCCSERVER_56000\Machines\Machine34\Tools\10205_TOOL_1.4.30.2.A0.0-B0.0.prb</FileName>
+                  <RMSError>0</RMSError>
+                  <MinError>0</MinError>
+                  <MaxError>0</MaxError>
+                  <GeometricQuality>0</GeometricQuality>
+                  <VerifyDistance>0</VerifyDistance>
+                  <mspVector name="TriangulationVector">
+                    <I>0</I>
+                    <J>0</J>
+                    <K>0</K>
+                  </mspVector>
+                  <PhaseToHeightRMSError>0</PhaseToHeightRMSError>
+                  <NanCount>0</NanCount>
+                  <IlluminationIsLow>false</IlluminationIsLow>
+                </mspCalibration>
+              </mspHeadAngle>
+              <CalibrationParts/>
+            </mspIPPHeadOrientation>
+          </HeadOrientationMGR>
+          <IQInfo>
+            <HasIQCalibration>false</HasIQCalibration>
+            <IQTipRadius>0</IQTipRadius>
+            <IQPrbFile>NotSet</IQPrbFile>
+            <LastIQTime>Never</LastIQTime>
+          </IQInfo>
+        </mspStylus>
+      </TipMGR>
+      <LatchedOptical>false</LatchedOptical>
+      <BaseToolInfo SelectedBaseTool="BaseSM25-2" Linked="false"/>
+      <mspIPPPropCO name="Props">
+        <IPPProp name="Parent" type="mspIPPPropString">
+          <Value>None</Value>
+        </IPPProp>
+        <IPPProp name="ProbeType" type="mspIPPPropInt">
+          <Value>7</Value>
+        </IPPProp>
+        <IPPProp name="GoToPar" type="mspIPPPropParBlock"/>
+        <IPPProp type="mspIPPPropStandard" name="GoToPar.Speed" mask="17">
+          <Min type="4">2</Min>
+          <Max type="4">721.6878369999999</Max>
+          <Def type="4">50</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="GoToPar.Accel" mask="1">
+          <Min type="4">2</Min>
+          <Max type="4">500</Max>
+          <Def type="4">50</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="GoToPar.RSpeed" mask="4">
+          <Min type="4">0.01</Min>
+          <Max type="4">30</Max>
+          <Def type="4">15</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="GoToPar.BlendDistance" mask="4">
+          <Min type="4">0</Min>
+          <Max type="4">100</Max>
+          <Def type="4">4</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="GoToPar.TipMoves" mask="260">
+          <Min type="1">false</Min>
+          <Max type="1">true</Max>
+          <Def type="1">true</Def>
+        </IPPProp>
+        <IPPProp name="PtMeasPar" type="mspIPPPropParBlock"/>
+        <IPPProp type="mspIPPPropStandard" name="PtMeasPar.Speed" mask="17">
+          <Min type="4">2</Min>
+          <Max type="4">40</Max>
+          <Def type="4">7</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="PtMeasPar.Accel" mask="257">
+          <Min type="4">2</Min>
+          <Max type="4">500</Max>
+          <Def type="4">50</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="PtMeasPar.Approach" mask="17">
+          <Min type="4">0</Min>
+          <Max type="4">1000</Max>
+          <Def type="4">3</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="PtMeasPar.Search" mask="17">
+          <Min type="4">0</Min>
+          <Max type="4">1000</Max>
+          <Def type="4">10</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="PtMeasPar.Retract" mask="17">
+          <Min type="4">-1</Min>
+          <Max type="4">1000</Max>
+          <Def type="4">3</Def>
+        </IPPProp>
+        <IPPProp name="ScanPar" type="mspIPPPropParBlock"/>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Speed" mask="17">
+          <Min type="4">0.1</Min>
+          <Max type="4">500</Max>
+          <Def type="4">20</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.KSpeed" mask="20">
+          <Min type="4">0.1</Min>
+          <Max type="4">500</Max>
+          <Def type="4">20</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Accel" mask="1">
+          <Min type="4">0.1</Min>
+          <Max type="4">500</Max>
+          <Def type="4">150</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.KAccel" mask="4">
+          <Min type="4">0.1</Min>
+          <Max type="4">500</Max>
+          <Def type="4">150</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.ChordalTol" mask="260">
+          <Min type="4">0</Min>
+          <Max type="4">1</Max>
+          <Def type="4">0</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Filter" mask="260">
+          <Min type="4">0</Min>
+          <Max type="4">1000</Max>
+          <Def type="4">0</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.PointPitch" mask="260">
+          <Min type="4">0</Min>
+          <Max type="4">1000</Max>
+          <Def type="4">2</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Revolutions" mask="260">
+          <Min type="4">0.1</Min>
+          <Max type="4">100</Max>
+          <Def type="4">3</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Deflection" mask="260">
+          <Min type="4">0.1</Min>
+          <Max type="4">1</Max>
+          <Def type="4">0.3</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Wavelength" mask="260">
+          <Min type="4">0</Min>
+          <Max type="4">1000</Max>
+          <Def type="4">5</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.DeadZone" mask="260">
+          <Min type="4">0</Min>
+          <Max type="4">1</Max>
+          <Def type="4">0.15</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.BlendDistance" mask="4">
+          <Min type="4">0</Min>
+          <Max type="4">100</Max>
+          <Def type="4">4</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="ScanPar.Retract" mask="17">
+          <Min type="4">-1</Min>
+          <Max type="4">100</Max>
+          <Def type="4">2</Def>
+        </IPPProp>
+        <IPPProp name="Calibration" type="mspIPPPropParBlock"/>
+        <IPPProp type="mspIPPPropStandard" name="Calibration.Deflection0" mask="260">
+          <Min type="4">0.001</Min>
+          <Max type="4">1</Max>
+          <Def type="4">0.2</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="Calibration.Deflection1" mask="260">
+          <Min type="4">0.001</Min>
+          <Max type="4">1</Max>
+          <Def type="4">0.5</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="Calibration.ScanSpeed" mask="260">
+          <Min type="4">0.1</Min>
+          <Max type="4">50</Max>
+          <Def type="4">10</Def>
+        </IPPProp>
+        <IPPProp type="mspIPPPropStandard" name="Calibration.CalPartClearance" mask="276">
+          <Min type="4">0</Min>
+          <Max type="4">10000</Max>
+          <Def type="4">10</Def>
+        </IPPProp>
+      </mspIPPPropCO>
+      <mspAssemblyList name="Assembly">
+        <mspStringArray name="ComponentNames">
+          <String>SP25_BODY_COMP</String>
+          <String>SM25-2_COMP</String>
+          <String>10205_TOOL_1_COMP</String>
+        </mspStringArray>
+      </mspAssemblyList>
+      <mspEquipment base="true">
+        <SerialNumber/>
+        <GUID>1E4C678B-27F1-49F3-AC2E-3E87A1BBD6AB</GUID>
+      </mspEquipment>
+    </IppTool>
+  </Tools>
+  <CalibrationParts name="CalibrationParts"/>
+  <Racks name="Racks"/>
+  <BaseTools name="BaseTools">
+    <mspBaseToolTemplate name="BaseSM25-2" type="BaseTool">
+      <mspIPPPropCO/>
+      <mspEquipment base="true">
+        <SerialNumber/>
+        <GUID>E0741F57-5C15-463F-AE9B-21CB4193457C</GUID>
+      </mspEquipment>
+    </mspBaseToolTemplate>
+  </BaseTools>
+  <MCU name="MCU"/>
+</mspXMLTree>

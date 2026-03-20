@@ -4,13 +4,86 @@
 <!-- Upload Form -->
 <section class="upload-section">
   <form method="POST" enctype="multipart/form-data" action="/">
-    <label class="upload-label">
-      <span>Upload MODUS Report (CSV or TXT)</span>
-      <input type="file" name="report_file" accept=".csv,.txt" required/>
-    </label>
-    <button type="submit" class="btn">Analyze Report</button>
+    <div class="upload-row">
+      <label class="upload-label">
+        <span>Upload MODUS Report (CSV or TXT)</span>
+        <input type="file" name="report_file" accept=".csv,.txt" required/>
+      </label>
+      <button type="button" class="btn-secondary"
+              onclick="toggleSettings()">[ Settings ]</button>
+      <button type="submit" class="btn">Analyze Report</button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel" style="display:none;">
+
+      <!-- Warning Threshold -->
+      <div class="settings-group">
+        <label class="settings-title">Warning Threshold</label>
+        <div class="slider-row">
+          <input type="range" name="warning_threshold"
+                 min="50" max="95" value="75" step="5"
+                 oninput="this.nextElementSibling.textContent = this.value + '%'"/>
+          <span>75%</span>
+        </div>
+      </div>
+
+      <!-- Status Filter -->
+      <div class="settings-group">
+        <label class="settings-title">Show Features</label>
+        <div class="radio-group">
+          <label><input type="radio" name="status_filter"
+                 value="all" checked/> All</label>
+          <label><input type="radio" name="status_filter"
+                 value="fail"/> Failures Only</label>
+          <label><input type="radio" name="status_filter"
+                 value="warning"/> Warnings Only</label>
+          <label><input type="radio" name="status_filter"
+                 value="pass"/> Passing Only</label>
+        </div>
+      </div>
+
+      <!-- Chart Visibility -->
+      <div class="settings-group">
+        <label class="settings-title">Charts</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="show_donut"
+                 value="1" checked/> Summary Donut</label>
+          <label><input type="checkbox" name="show_type"
+                 value="1" checked/> Feature Type Breakdown</label>
+          <label><input type="checkbox" name="show_dev"
+                 value="1" checked/> Deviation Chart</label>
+          <label><input type="checkbox" name="show_usage"
+                 value="1" checked/> Tolerance Usage</label>
+        </div>
+      </div>
+
+      <!-- Color Scheme -->
+      <div class="settings-group">
+        <label class="settings-title">Colors</label>
+        <div class="color-group">
+          <label>Pass
+            <input type="color" name="color_pass" value="#00C896"/>
+          </label>
+          <label>Fail
+            <input type="color" name="color_fail" value="#FF4C4C"/>
+          </label>
+          <label>Warning
+            <input type="color" name="color_warning" value="#FFA500"/>
+          </label>
+        </div>
+      </div>
+
+    </div>
   </form>
 </section>
+
+<script>
+function toggleSettings() {
+  const panel = document.getElementById('settingsPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+</script>
 
 {% if results %}
 
@@ -41,18 +114,28 @@
 </section>
 
 <!-- Charts -->
+{% if show_donut or show_type %}
 <section class="chart-grid">
+  {% if show_donut %}
   <div class="chart-card">{{ donut_chart | safe }}</div>
+  {% endif %}
+  {% if show_type %}
   <div class="chart-card">{{ type_chart | safe }}</div>
+  {% endif %}
 </section>
+{% endif %}
 
+{% if show_dev %}
 <section class="chart-full">
   <div class="chart-card">{{ dev_chart | safe }}</div>
 </section>
+{% endif %}
 
+{% if show_usage %}
 <section class="chart-full">
   <div class="chart-card">{{ usage_chart | safe }}</div>
 </section>
+{% endif %}
 
 <!-- Table -->
 <section class="table-section">

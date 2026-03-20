@@ -1,0 +1,11 @@
+<Sequence name="">
+<Record type="PtMeas" label="FIRING_PIN_RETENTION_HOLE_CIRCLE_ptmeas1">
+<Point><X>5.375675</X><Y>11.305065</Y><Z>-63.522611</Z><ER>0.752160</ER></Point>
+</Record>
+<Record type="PtMeas" label="FIRING_PIN_RETENTION_HOLE_CIRCLE_ptmeas2">
+<Point><X>6.427863</X><Y>11.189767</Y><Z>-65.417697</Z><ER>0.752160</ER></Point>
+</Record>
+<Record type="PtMeas" label="FIRING_PIN_RETENTION_HOLE_CIRCLE_ptmeas3">
+<Point><X>4.283311</X><Y>11.180995</Y><Z>-65.391194</Z><ER>0.752160</ER></Point>
+</Record>
+</Sequence>
