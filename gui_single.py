@@ -164,7 +164,7 @@ class SingleReportTab(QWidget):
     def _browse_file(self):
         path, _ = QFileDialog.getOpenFileName(
             self, "Open MODUS Report", "",
-            "Report Files (*.csv *.txt);;All Files (*)"
+            "Report Files (*.csv *.txt *.res *.rtf);;All Files (*)"
         )
         if path:
             self.filepath = path

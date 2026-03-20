@@ -4,6 +4,7 @@
 #   - Standard CSV format (Feature Name, Feature Type, Nominal...)
 #   - MODUS fixed-format report (.csv or .txt)
 
+import os
 import pandas as pd
 from models import Feature, Measurement, Tolerance, Report
 
@@ -28,11 +29,8 @@ def _is_modus_format(filepath: str) -> bool:
 
 
 def load_report(filepath: str) -> Report:
-    """
-    Loads a CMM report from either format.
-    Auto-detects which parser to use based on file content.
-    """
-    if _is_modus_format(filepath):
+    ext = os.path.splitext(filepath)[1].lower()
+    if ext in (".res", ".rtf") or _is_modus_format(filepath):
         from modus_parser import load_modus_report
         return load_modus_report(filepath)
     else:

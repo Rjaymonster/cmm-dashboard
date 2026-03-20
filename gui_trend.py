@@ -148,7 +148,7 @@ class TrendTab(QWidget):
     def _browse_files(self):
         paths, _ = QFileDialog.getOpenFileNames(
             self, "Open MODUS Reports", "",
-            "Report Files (*.csv *.txt);;All Files (*)"
+            "Report Files (*.csv *.txt *.res *.rtf);;All Files (*)"
         )
         if paths:
             self.filepaths = sorted(paths)
