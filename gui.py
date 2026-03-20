@@ -77,19 +77,27 @@ class MainWindow(QMainWindow):
             }
         """)
 
-        # Add tabs
        # Add tabs
         from gui_single import SingleReportTab
         from gui_trend import TrendTab
         from gui_settings import SettingsTab
+        from gui_live import LiveTab
 
         self.single_tab   = SingleReportTab()
         self.trend_tab    = TrendTab()
         self.settings_tab = SettingsTab()
+        self.live_tab     = LiveTab()
 
+        self.tabs.addTab(self.live_tab,     "⚡ Live")
         self.tabs.addTab(self.single_tab,   "Single Report")
         self.tabs.addTab(self.trend_tab,    "Multi-Run Trend")
         self.tabs.addTab(self.settings_tab, "⚙ Settings")
+
+        # React to settings changes
+        self.settings_tab.settings_changed.connect(self._on_settings_changed)
+
+        # React to live tab watch requests
+        self.live_tab.report_updated.connect(self._on_live_watch_request)
 
         # React to settings changes
         self.settings_tab.settings_changed.connect(self._on_settings_changed)
@@ -131,6 +139,7 @@ class MainWindow(QMainWindow):
         """Called when settings are saved — restarts watchers."""
         self.watcher.stop_all()
         self._start_watchers()
+        self.live_tab.refresh_programs()
         self.status.showMessage("Settings updated — watchers restarted")
 
     def _start_watchers(self):
@@ -140,14 +149,47 @@ class MainWindow(QMainWindow):
             if folder.get("active", True):
                 self.watcher.start_watching(folder["name"], folder["path"])
 
+    def _on_live_watch_request(self, folder_path: str):
+        """
+        Called when the live tab requests to start or stop
+        watching a specific folder.
+        Empty path means stop watching.
+        """
+        # Stop any existing live watcher
+        for path in list(self.watcher.active_folders):
+            if path not in [
+                f["path"] for f in __import__('settings').get_watched_folders()
+                if f.get("active", True)
+            ]:
+                self.watcher.stop_watching(path)
+
+        if folder_path:
+            # Find folder name from settings
+            from settings import get_watched_folders
+            name = next(
+                (f["name"] for f in get_watched_folders()
+                if f["path"] == folder_path),
+                "Live Folder"
+            )
+            self.watcher.start_watching(name, folder_path)
+            self.status.showMessage(f"Live watching: {name}")
+        else:
+            self.status.showMessage("Live watching stopped")
+
     def _on_new_report(self, folder_name: str, filepath: str):
-        """Called when a new report file is detected in a watched folder."""
+        """Called when a new report file is detected."""
         self.status.showMessage(
             f"New report detected in {folder_name}: {filepath}"
         )
-        # Auto-load the report in the Single Report tab
-        self.single_tab.auto_load(filepath)
-        self.tabs.setCurrentIndex(0)
+        # If live tab is watching this folder update it
+        current_path = self.live_tab.current_folder
+        if current_path and filepath.startswith(current_path):
+            self.live_tab.load_report_file(filepath)
+            self.tabs.setCurrentIndex(0)
+        else:
+            # Otherwise auto-load in single report tab
+            self.single_tab.auto_load(filepath)
+            self.tabs.setCurrentIndex(1)
 
     def closeEvent(self, event):
         """Stop all watchers cleanly when the app closes."""
