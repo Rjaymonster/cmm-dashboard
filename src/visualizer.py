@@ -478,10 +478,10 @@ def capability_chart(results: list, colors: dict = None) -> go.Figure:
     Bar chart showing Cpk per feature colored by rating.
     Reference lines at 1.0, 1.33, and 1.67.
     """
-    names  = [r.feature_name for r in cap_results]
-    cpk    = [r.cpk for r in cap_results]
-    cp     = [r.cp for r in cap_results]
-    colors = [r.color for r in cap_results]
+    names  = [r.feature_name for r in results]
+    cpk    = [r.cpk for r in results]
+    cp     = [r.cp for r in results]
+    colors = [r.color for r in results]
 
     fig = go.Figure()
 

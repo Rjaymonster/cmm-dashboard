@@ -71,9 +71,33 @@ class TrendTab(QWidget):
         analyze_btn.setStyleSheet(self._btn_style("#00C896", "#0F1117"))
         analyze_btn.clicked.connect(self._analyze)
 
+        self.export_btn = QPushButton("Export to Excel")
+        self.export_btn.setStyleSheet("""
+            QPushButton {
+                background: #1A1D27;
+                color: #3A3D4A;
+                border: 1px solid rgba(255,255,255,0.05);
+                border-radius: 8px;
+                padding: 8px 20px;
+                font-size: 13px;
+                font-weight: bold;
+            }
+            QPushButton:enabled {
+                background: #1A1D27;
+                color: #00C896;
+                border: 1px solid #00C896;
+            }
+            QPushButton:enabled:hover {
+                background: rgba(0,200,150,0.1);
+            }
+        """)
+        self.export_btn.clicked.connect(self._export_excel)
+        self.export_btn.setEnabled(False)
+
         upload_row.addWidget(self.file_label, 1)
         upload_row.addWidget(browse_btn)
         upload_row.addWidget(analyze_btn)
+        upload_row.addWidget(self.export_btn)
         main_layout.addLayout(upload_row)
 
         # Stat cards
@@ -156,6 +180,7 @@ class TrendTab(QWidget):
         self.runs, self.cap_results = data
         self._update_stats()
         self._update_charts()
+        self.export_btn.setEnabled(True)
         self.file_label.setText(f"{len(self.runs)} runs loaded")
         self.file_label.setStyleSheet("color: #00C896; font-size: 13px;")
 
@@ -205,3 +230,36 @@ class TrendTab(QWidget):
             view.setHtml(html)
             view.setStyleSheet("background: #1A1D27; border-radius: 12px;")
             self.charts_layout.addWidget(view)
+
+    def _export_excel(self):
+        if not self.runs:
+            return
+
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save Excel Report", "",
+            "Excel Files (*.xlsx);;All Files (*)"
+        )
+        if not path:
+            return
+
+        if not path.endswith(".xlsx"):
+            path += ".xlsx"
+
+        from excel_export import export_to_excel
+
+        success = export_to_excel(
+            output_path=path,
+            results=self.runs[0].results,
+            source_file="Multi-Run Trend Analysis",
+            cap_results=self.cap_results,
+            runs=self.runs,
+        )
+
+        if success:
+            from PyQt6.QtWidgets import QMessageBox
+            QMessageBox.information(self, "Export Complete",
+                                    f"Report saved to:\n{path}")
+        else:
+            from PyQt6.QtWidgets import QMessageBox
+            QMessageBox.warning(self, "Export Failed",
+                                "Failed to save Excel file.")
