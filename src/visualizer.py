@@ -112,7 +112,7 @@ def tolerance_usage_chart(results: list, colors: dict = None) -> go.Figure:
         y=names,
         orientation="h",
         marker_color=colors,
-        text=[f"{r.percent_used:.1f}%" for r in results],
+        text=[f"{min(r.percent_used, 999):.1f}%" for r in results],
         textposition="outside",
     ))
 
