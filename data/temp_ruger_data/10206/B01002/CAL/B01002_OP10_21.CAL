@@ -1,5 +1,0 @@
-<Sequence name="">
-<Record type="PtMeas" label="DATUM_A_SL_BACK_POINT_ptmeas1">
-<Point><X>-0.501085</X><Y>9.846791</Y><Z>-60.236991</Z><ER>0.501470</ER></Point>
-</Record>
-</Sequence>

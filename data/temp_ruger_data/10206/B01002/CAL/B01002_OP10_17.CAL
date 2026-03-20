@@ -1,5 +1,0 @@
-<Sequence name="">
-<Record type="PtMeas" label="DATUM_B_FRONT_PAD_POINT_1_ptmeas1">
-<Point><X>0.753822</X><Y>-0.515375</Y><Z>-6.602587</Z><ER>0.501470</ER></Point>
-</Record>
-</Sequence>
