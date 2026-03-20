@@ -100,9 +100,33 @@ class SingleReportTab(QWidget):
         analyze_btn.setStyleSheet(self._btn_style("#00C896", "#0F1117"))
         analyze_btn.clicked.connect(self._analyze)
 
+        self.export_btn = QPushButton("Export to Excel")
+        self.export_btn.setStyleSheet("""
+            QPushButton {
+                background: #1A1D27;
+                color: #3A3D4A;
+                border: 1px solid rgba(255,255,255,0.05);
+                border-radius: 8px;
+                padding: 8px 20px;
+                font-size: 13px;
+                font-weight: bold;
+            }
+            QPushButton:enabled {
+                background: #1A1D27;
+                color: #00C896;
+                border: 1px solid #00C896;
+            }
+            QPushButton:enabled:hover {
+                background: rgba(0,200,150,0.1);
+            }
+        """)
+        self.export_btn.clicked.connect(self._export_excel)
+        self.export_btn.setEnabled(False)
+
         upload_row.addWidget(self.file_label, 1)
         upload_row.addWidget(browse_btn)
         upload_row.addWidget(analyze_btn)
+        upload_row.addWidget(self.export_btn)
         main_layout.addLayout(upload_row)
 
         # Stat cards row
@@ -177,6 +201,7 @@ class SingleReportTab(QWidget):
         self.results = results
         self._update_stats()
         self._update_charts()
+        self.export_btn.setEnabled(True)
         self.file_label.setText(f"Loaded: {os.path.basename(self.filepath)}")
         self.file_label.setStyleSheet("color: #00C896; font-size: 13px;")
 
@@ -226,3 +251,38 @@ class SingleReportTab(QWidget):
             view.setHtml(html)
             view.setStyleSheet("background: #1A1D27; border-radius: 12px;")
             self.charts_layout.addWidget(view)
+
+    def _export_excel(self):
+        if not self.results:
+            return
+
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save Excel Report", "",
+            "Excel Files (*.xlsx);;All Files (*)"
+        )
+        if not path:
+            return
+
+        if not path.endswith(".xlsx"):
+            path += ".xlsx"
+
+        import sys
+        import os
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+        from excel_export import export_to_excel
+
+        source = getattr(self, "filepath", "report")
+        success = export_to_excel(
+            output_path=path,
+            results=self.results,
+            source_file=source,
+        )
+
+        if success:
+            from PyQt6.QtWidgets import QMessageBox
+            QMessageBox.information(self, "Export Complete",
+                                    f"Report saved to:\n{path}")
+        else:
+            from PyQt6.QtWidgets import QMessageBox
+            QMessageBox.warning(self, "Export Failed",
+                                "Failed to save Excel file.")

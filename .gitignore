@@ -17,3 +17,5 @@ tmp_*.csv
 # OS files
 .DS_Store
 Thumbs.db
+
+*.xlsx
