@@ -106,27 +106,27 @@ class CircularityEvaluator(BaseEvaluator):
     A negative Deviation is physically meaningless, treat it as zero.
     """
 
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = max(0.0, feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
     
 class FlatnessEvaluator(BaseEvaluator):
     """
     Flastness is a form tolerance - always positive. Same rules a Circularity.
     """
 
-    def evaluate(self, feature: Feature) ->EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) ->EvaluationResult:
         feature.measurement.deviation = max(0.0, feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
     
 class PositionEvaluator(BaseEvaluator):
     """
     Position is a distance from true position - always positive.
     """
 
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
     
 class DiameterEvaluator(BaseEvaluator):
     """
@@ -139,9 +139,9 @@ class AngularityEvaluator(BaseEvaluator):
     """
     Angularity is an orientation tolerance — always positive.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 class DefaultEvaluator(BaseEvaluator):
     """
@@ -153,63 +153,63 @@ class CylindricityEvaluator(BaseEvaluator):
     """
     Cylindricity is a form tolerance — always positive.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = max(0.0, feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class StraightnessEvaluator(BaseEvaluator):
     """
     Straightness is a form tolerance — always positive.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = max(0.0, feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class PerpendicularityEvaluator(BaseEvaluator):
     """
     Perpendicularity is an orientation tolerance — always positive.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class ParallelismEvaluator(BaseEvaluator):
     """
     Parallelism is an orientation tolerance — always positive.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class RunoutEvaluator(BaseEvaluator):
     """
     Runout is always positive — it is a measured total indicator reading.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class TotalRunoutEvaluator(BaseEvaluator):
     """
     Total Runout is always positive — same rules as Runout.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class ConcentricityEvaluator(BaseEvaluator):
     """
     Concentricity is always positive — it is a derived median point tolerance.
     """
-    def evaluate(self, feature: Feature) -> EvaluationResult:
+    def evaluate(self, feature: Feature, warning_threshold: float = 75.0) -> EvaluationResult:
         feature.measurement.deviation = abs(feature.measurement.deviation)
-        return super().evaluate(feature)
+        return super().evaluate(feature, warning_threshold)
 
 
 class ProfileOfLineEvaluator(BaseEvaluator):
