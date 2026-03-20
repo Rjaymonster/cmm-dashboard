@@ -147,6 +147,16 @@ class SingleReportTab(QWidget):
             self.file_label.setText(os.path.basename(path))
             self.file_label.setStyleSheet("color: #E8EAF0; font-size: 13px;")
 
+    def auto_load(self, filepath: str):
+        """
+        Automatically loads and analyzes a report file.
+        Called by the folder watcher when a new file is detected.
+        """
+        self.filepath = filepath
+        self.file_label.setText(f"Auto-detected: {os.path.basename(filepath)}")
+        self.file_label.setStyleSheet("color: #FFA500; font-size: 13px;")
+        self._analyze()
+
     def _analyze(self):
         if not hasattr(self, "filepath"):
             self.file_label.setText("Please select a file first")

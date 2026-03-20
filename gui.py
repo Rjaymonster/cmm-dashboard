@@ -14,6 +14,8 @@ from PyQt6.QtGui import QFont, QColor, QPalette
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
+from watcher import FolderWatcher
+
 
 # ── Main Window ───────────────────────────────────────────────────
 
@@ -23,7 +25,9 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("CMM Dashboard")
         self.setMinimumSize(1200, 800)
         self._apply_dark_theme()
+        self.watcher = FolderWatcher(callback=self._on_new_report)
         self._build_ui()
+        self._start_watchers()
 
     def _apply_dark_theme(self):
         """Applies a dark color palette to the entire application."""
@@ -74,11 +78,21 @@ class MainWindow(QMainWindow):
         """)
 
         # Add tabs
+       # Add tabs
         from gui_single import SingleReportTab
         from gui_trend import TrendTab
+        from gui_settings import SettingsTab
 
-        self.tabs.addTab(SingleReportTab(), "Single Report")
-        self.tabs.addTab(TrendTab(), "Multi-Run Trend")
+        self.single_tab   = SingleReportTab()
+        self.trend_tab    = TrendTab()
+        self.settings_tab = SettingsTab()
+
+        self.tabs.addTab(self.single_tab,   "Single Report")
+        self.tabs.addTab(self.trend_tab,    "Multi-Run Trend")
+        self.tabs.addTab(self.settings_tab, "⚙ Settings")
+
+        # React to settings changes
+        self.settings_tab.settings_changed.connect(self._on_settings_changed)
 
         layout.addWidget(self.tabs)
 
@@ -112,7 +126,33 @@ class MainWindow(QMainWindow):
         layout.addStretch()
 
         return header
+    
+    def _on_settings_changed(self):
+        """Called when settings are saved — restarts watchers."""
+        self.watcher.stop_all()
+        self._start_watchers()
+        self.status.showMessage("Settings updated — watchers restarted")
 
+    def _start_watchers(self):
+        """Starts watching all active folders from settings."""
+        from settings import get_watched_folders
+        for folder in get_watched_folders():
+            if folder.get("active", True):
+                self.watcher.start_watching(folder["name"], folder["path"])
+
+    def _on_new_report(self, folder_name: str, filepath: str):
+        """Called when a new report file is detected in a watched folder."""
+        self.status.showMessage(
+            f"New report detected in {folder_name}: {filepath}"
+        )
+        # Auto-load the report in the Single Report tab
+        self.single_tab.auto_load(filepath)
+        self.tabs.setCurrentIndex(0)
+
+    def closeEvent(self, event):
+        """Stop all watchers cleanly when the app closes."""
+        self.watcher.stop_all()
+        event.accept()
 
 # ── Entry Point ───────────────────────────────────────────────────
 
