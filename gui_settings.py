@@ -1,16 +1,14 @@
 # gui_settings.py
 # Settings screen for the CMM Dashboard.
-# Allows users to manage watched folders and global filters
-# without touching any code or config files directly.
 
 import os
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
     QLabel, QLineEdit, QFileDialog, QScrollArea,
-    QFrame, QCheckBox, QSlider, QSpinBox, QMessageBox
+    QFrame, QCheckBox, QSlider, QSpinBox, QMessageBox,
+    QDialog, QDialogButtonBox, QSizePolicy
 )
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont
 
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
@@ -21,23 +19,26 @@ from settings import (
     update_watched_folder, get_watched_folders
 )
 
+FEATURE_TYPES = [
+    "Circularity", "Cylindricity", "Flatness", "Straightness",
+    "Position", "Concentricity", "Angularity", "Parallelism",
+    "Perpendicularity", "Runout", "Total Runout",
+    "Profile of a Line", "Profile of a Surface", "Diameter"
+]
 
-# ── Folder Card Widget ────────────────────────────────────────────
+
+# ── Folder Card ───────────────────────────────────────────────────
 
 class FolderCard(QFrame):
-    """
-    Displays a single watched folder with its name, path,
-    active toggle, and remove button.
-    """
-    removed  = pyqtSignal(str)   # emits path when removed
-    toggled  = pyqtSignal(str, bool)  # emits path, active state
+    removed = pyqtSignal(str)
+    toggled = pyqtSignal(str, bool)
 
     def __init__(self, folder: dict):
         super().__init__()
         self.folder = folder
         self.setStyleSheet("""
             QFrame {
-                background: #1A1D27;
+                background: #0F1117;
                 border: 1px solid rgba(255,255,255,0.07);
                 border-radius: 10px;
                 padding: 4px;
@@ -49,7 +50,6 @@ class FolderCard(QFrame):
         layout = QHBoxLayout(self)
         layout.setContentsMargins(16, 12, 16, 12)
 
-        # Info column
         info = QVBoxLayout()
         info.setSpacing(4)
 
@@ -64,7 +64,6 @@ class FolderCard(QFrame):
         info.addWidget(path_label)
         layout.addLayout(info, 1)
 
-        # Active toggle
         active_cb = QCheckBox("Active")
         active_cb.setChecked(self.folder.get("active", True))
         active_cb.setStyleSheet("color: #7B8099; font-size: 12px;")
@@ -75,7 +74,6 @@ class FolderCard(QFrame):
         )
         layout.addWidget(active_cb)
 
-        # Remove button
         remove_btn = QPushButton("Remove")
         remove_btn.setStyleSheet("""
             QPushButton {
@@ -88,40 +86,47 @@ class FolderCard(QFrame):
             }
             QPushButton:hover { background: rgba(255,76,76,0.1); }
         """)
-        remove_btn.clicked.connect(
-            lambda: self.removed.emit(self.folder["path"])
-        )
+        remove_btn.clicked.connect(lambda: self.removed.emit(self.folder["path"]))
         layout.addWidget(remove_btn)
 
 
 # ── Settings Tab ──────────────────────────────────────────────────
 
 class SettingsTab(QWidget):
-    """
-    Full settings screen with two sections:
-    1. Watched Folders — add/remove/toggle folders
-    2. Global Filters — warning threshold, status filter etc.
-    """
-
-    # Signal emitted when settings change so other tabs can react
     settings_changed = pyqtSignal()
 
     def __init__(self):
         super().__init__()
+        self.feature_checkboxes = {}
         self._build_ui()
         self._load_folders()
 
     def _build_ui(self):
-        main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(24, 24, 24, 24)
-        main_layout.setSpacing(24)
+        self.setStyleSheet("background: #0F1117;")
 
-        # ── Section 1: Watched Folders ────────────────────────────
+        # Wrap everything in a scroll area
+        outer_layout = QVBoxLayout(self)
+        outer_layout.setContentsMargins(0, 0, 0, 0)
+
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QScrollArea.Shape.NoFrame)
+        scroll.setStyleSheet("background: #0F1117; border: none;")
+        scroll.viewport().setStyleSheet("background: #0F1117;")
+
+        content = QWidget()
+        content.setStyleSheet("background: #0F1117;")
+        outer_layout.addWidget(scroll)
+        scroll.setWidget(content)
+
+        main_layout = QVBoxLayout(content)
+        main_layout.setContentsMargins(24, 24, 24, 24)
+        main_layout.setSpacing(20)
+
+        # ── Watched Folders ───────────────────────────────────────
         main_layout.addWidget(self._section_title("Watched Folders"))
 
-        # Add folder row
         add_row = QHBoxLayout()
-
         self.name_input = QLineEdit()
         self.name_input.setPlaceholderText("Folder name e.g. Equator 1 - Part ABC")
         self.name_input.setStyleSheet(self._input_style())
@@ -144,23 +149,38 @@ class SettingsTab(QWidget):
         add_row.addWidget(add_btn)
         main_layout.addLayout(add_row)
 
-        # Folder list scroll area
+        # Folder list
+        folders_container = QWidget()
+        folders_container.setStyleSheet("background: #0F1117;")
+        folders_container.setMaximumHeight(180)
+        container_layout = QVBoxLayout(folders_container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
+
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setMaximumHeight(300)
-        scroll.setStyleSheet("QScrollArea { border: none; background: transparent; }")
+        scroll.setFrameShape(QScrollArea.Shape.NoFrame)
+        scroll.setStyleSheet("background: #0F1117; border: none;")
 
         self.folders_widget = QWidget()
+        self.folders_widget.setStyleSheet("background: #0F1117;")
         self.folders_layout = QVBoxLayout(self.folders_widget)
         self.folders_layout.setSpacing(8)
         self.folders_layout.addStretch()
-        scroll.setWidget(self.folders_widget)
-        main_layout.addWidget(scroll)
 
-        # ── Section 2: Global Filters ─────────────────────────────
+        scroll.setWidget(self.folders_widget)
+        scroll.viewport().setStyleSheet("background: #0F1117;")
+        container_layout.addWidget(scroll)
+        main_layout.addWidget(folders_container)
+
+        # ── Global Filters ────────────────────────────────────────
         main_layout.addWidget(self._section_title("Global Filters"))
 
         filters_frame = QFrame()
+        filters_frame.setSizePolicy(
+            QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Preferred
+        )
+        filters_frame.setMinimumHeight(200)
         filters_frame.setStyleSheet("""
             QFrame {
                 background: #1A1D27;
@@ -172,7 +192,7 @@ class SettingsTab(QWidget):
         filters_layout.setContentsMargins(20, 16, 20, 16)
         filters_layout.setSpacing(16)
 
-        # Warning threshold slider
+        # Warning threshold
         threshold_row = QHBoxLayout()
         threshold_label = QLabel("Warning Threshold:")
         threshold_label.setStyleSheet("color: #E8EAF0; font-size: 13px;")
@@ -191,7 +211,6 @@ class SettingsTab(QWidget):
         self.threshold_slider.valueChanged.connect(
             lambda v: self.threshold_value.setText(f"{v}%")
         )
-
         threshold_row.addWidget(threshold_label)
         threshold_row.addWidget(self.threshold_slider)
         threshold_row.addWidget(self.threshold_value)
@@ -216,17 +235,17 @@ class SettingsTab(QWidget):
                 font-size: 13px;
             }
         """)
-
         cpk_row.addWidget(cpk_label)
         cpk_row.addWidget(self.cpk_spin)
         cpk_row.addStretch()
         filters_layout.addLayout(cpk_row)
 
-        # Status filter checkboxes
+        # Status filter
         status_row = QHBoxLayout()
         status_label = QLabel("Show Status:")
         status_label.setStyleSheet("color: #E8EAF0; font-size: 13px;")
         status_label.setFixedWidth(180)
+        status_row.addWidget(status_label)
 
         self.cb_pass    = QCheckBox("PASS")
         self.cb_fail    = QCheckBox("FAIL")
@@ -241,11 +260,17 @@ class SettingsTab(QWidget):
             cb.setChecked(True)
             status_row.addWidget(cb)
 
-        status_row.insertWidget(0, status_label)
         status_row.addStretch()
         filters_layout.addLayout(status_row)
 
+        # Feature type filter button
         main_layout.addWidget(filters_frame)
+
+        # Feature type filter button — outside the frame
+        feature_btn = QPushButton("Configure Feature Type Filters")
+        feature_btn.setStyleSheet(self._btn_style("#1A1D27", "#7B8099"))
+        feature_btn.clicked.connect(self._show_feature_filter_dialog)
+        main_layout.addWidget(feature_btn)
 
         # Save button
         save_btn = QPushButton("Save Settings")
@@ -254,9 +279,6 @@ class SettingsTab(QWidget):
         save_btn.clicked.connect(self._save_filters)
         main_layout.addWidget(save_btn, alignment=Qt.AlignmentFlag.AlignRight)
 
-        main_layout.addStretch()
-
-        # Load current filter values
         self._load_filters()
 
     def _section_title(self, text: str) -> QLabel:
@@ -325,7 +347,6 @@ class SettingsTab(QWidget):
             self._show_error("This folder is already being watched.")
 
     def _load_folders(self):
-        # Clear existing cards
         for i in reversed(range(self.folders_layout.count())):
             item = self.folders_layout.itemAt(i)
             if item.widget():
@@ -364,10 +385,8 @@ class SettingsTab(QWidget):
     def _load_filters(self):
         settings = load_settings()
         filters  = settings.get("global_filters", {})
-
         self.threshold_slider.setValue(filters.get("warning_threshold", 75))
         self.cpk_spin.setValue(filters.get("min_cpk_samples", 10))
-
         show_status = filters.get("show_status", ["PASS", "FAIL", "WARNING"])
         self.cb_pass.setChecked("PASS" in show_status)
         self.cb_fail.setChecked("FAIL" in show_status)
@@ -381,20 +400,100 @@ class SettingsTab(QWidget):
         if self.cb_fail.isChecked():    show_status.append("FAIL")
         if self.cb_warning.isChecked(): show_status.append("WARNING")
 
+        if self.feature_checkboxes:
+            selected_types = [
+                ft for ft, cb in self.feature_checkboxes.items()
+                if cb.isChecked()
+            ]
+        else:
+            selected_types = settings["global_filters"].get(
+                "feature_types", FEATURE_TYPES
+            )
+
         settings["global_filters"] = {
             "warning_threshold": self.threshold_slider.value(),
             "min_cpk_samples":   self.cpk_spin.value(),
             "show_status":       show_status,
-            "feature_types":     settings["global_filters"].get("feature_types", []),
-            "tolerance_range":   settings["global_filters"].get("tolerance_range",
-                                 {"min": 0.0, "max": 999.0})
+            "feature_types":     selected_types,
+            "tolerance_range":   settings["global_filters"].get(
+                "tolerance_range", {"min": 0.0, "max": 999.0}
+            )
         }
 
         if save_settings(settings):
             self.settings_changed.emit()
-            QMessageBox.information(self, "Saved", "Settings saved successfully.")
-        else:
-            self._show_error("Failed to save settings.")
+            msg = QMessageBox(self)
+            msg.setWindowTitle("Saved")
+            msg.setText("Settings saved successfully.")
+            msg.setIcon(QMessageBox.Icon.Information)
+            msg.setStyleSheet("""
+                QMessageBox { background: #1A1D27; }
+                QMessageBox QLabel { color: #E8EAF0; font-size: 13px; }
+                QPushButton {
+                    background: #00C896;
+                    color: #0F1117;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 6px 16px;
+                    font-weight: bold;
+                }
+            """)
+            msg.exec()
+
+    def _show_feature_filter_dialog(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Feature Type Filters")
+        dialog.setStyleSheet("background: #1A1D27; color: #E8EAF0;")
+        dialog.setMinimumWidth(400)
+
+        layout = QVBoxLayout(dialog)
+        layout.setSpacing(8)
+        layout.setContentsMargins(20, 20, 20, 20)
+
+        label = QLabel("Select feature types to include in analysis:")
+        label.setStyleSheet("color: #7B8099; font-size: 12px;")
+        layout.addWidget(label)
+
+        settings     = load_settings()
+        saved_types  = settings.get("global_filters", {}).get(
+            "feature_types", FEATURE_TYPES
+        )
+
+        self.feature_checkboxes = {}
+        for ft in FEATURE_TYPES:
+            cb = QCheckBox(ft)
+            cb.setChecked(ft in saved_types)
+            cb.setStyleSheet("color: #E8EAF0; font-size: 13px;")
+            self.feature_checkboxes[ft] = cb
+            layout.addWidget(cb)
+
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok |
+            QDialogButtonBox.StandardButton.Cancel
+        )
+        buttons.setStyleSheet("color: #E8EAF0;")
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self._save_filters()
 
     def _show_error(self, message: str):
-        QMessageBox.warning(self, "Error", message)
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Error")
+        msg.setText(message)
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setStyleSheet("""
+            QMessageBox { background: #1A1D27; }
+            QMessageBox QLabel { color: #E8EAF0; font-size: 13px; }
+            QPushButton {
+                background: #FF4C4C;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 6px;
+                padding: 6px 16px;
+                font-weight: bold;
+            }
+        """)
+        msg.exec()

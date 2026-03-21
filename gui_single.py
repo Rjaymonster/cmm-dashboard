@@ -139,9 +139,13 @@ class SingleReportTab(QWidget):
         # Scroll area for charts
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setStyleSheet("QScrollArea { border: none; background: #0F1117; }")
+        scroll.setStyleSheet("""
+            QScrollArea { border: none; background: #0F1117; }
+            QScrollArea > QWidget > QWidget { background: #0F1117; }
+        """)
 
         self.charts_widget = QWidget()
+        self.charts_widget.setStyleSheet("background: #0F1117;")
         self.charts_layout = QVBoxLayout(self.charts_widget)
         self.charts_layout.setSpacing(16)
         scroll.setWidget(self.charts_widget)
@@ -198,6 +202,12 @@ class SingleReportTab(QWidget):
             self.file_label.setStyleSheet("color: #FF4C4C; font-size: 13px;")
             return
 
+        from settings import get_global_filters
+        filters = get_global_filters()
+        feature_types = filters.get("feature_types", [])
+        if feature_types:
+            results = [r for r in results if r.feature_type in feature_types]
+
         self.results = results
         self._update_stats()
         self._update_charts()
@@ -246,10 +256,12 @@ class SingleReportTab(QWidget):
 
         for fig in charts:
             html = fig.to_html(include_plotlyjs="cdn")
+            html = html.replace("<body>", '<body style="background-color: #0F1117; margin: 0; padding: 0;">')
             view = QWebEngineView()
             view.setMinimumHeight(400)
             view.setHtml(html)
-            view.setStyleSheet("background: #1A1D27; border-radius: 12px;")
+            view.setStyleSheet("background: #0F1117; border-radius: 12px;")
+            view.page().setBackgroundColor(Qt.GlobalColor.transparent)
             self.charts_layout.addWidget(view)
 
     def _export_excel(self):

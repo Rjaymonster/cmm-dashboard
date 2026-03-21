@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
     QLabel, QFileDialog, QScrollArea
 )
-from PyQt6.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal, Qt
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 
 import sys
@@ -123,9 +123,13 @@ class TrendTab(QWidget):
         # Scroll area for charts
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setStyleSheet("QScrollArea { border: none; background: #0F1117; }")
+        scroll.setStyleSheet("""
+            QScrollArea { border: none; background: #0F1117; }
+            QScrollArea > QWidget > QWidget { background: #0F1117; }
+        """)
 
         self.charts_widget = QWidget()
+        self.charts_widget.setStyleSheet("background: #0F1117;")
         self.charts_layout = QVBoxLayout(self.charts_widget)
         self.charts_layout.setSpacing(16)
         scroll.setWidget(self.charts_widget)
@@ -225,10 +229,12 @@ class TrendTab(QWidget):
 
         for fig in charts:
             html = fig.to_html(include_plotlyjs="cdn")
+            html = html.replace("<body>", '<body style="background-color: #0F1117; margin: 0; padding: 0;">')
             view = QWebEngineView()
             view.setMinimumHeight(450)
             view.setHtml(html)
             view.setStyleSheet("background: #1A1D27; border-radius: 12px;")
+            view.page().setBackgroundColor(Qt.GlobalColor.transparent)
             self.charts_layout.addWidget(view)
 
     def _export_excel(self):

@@ -1,13 +1,16 @@
 {
   "global_filters": {
-    "warning_threshold": 75,
+    "warning_threshold": 95,
     "min_cpk_samples": 10,
     "show_status": [
       "PASS",
       "FAIL",
       "WARNING"
     ],
-    "feature_types": [],
+    "feature_types": [
+      "Position",
+      "Diameter"
+    ],
     "tolerance_range": {
       "min": 0.0,
       "max": 999.0
@@ -15,7 +18,7 @@
   },
   "watched_folders": [
     {
-      "name": "Test Equator",
+      "name": "Test_folder",
       "path": "C:/Users/Robby Wood/Desktop/cmm-dashboard/data",
       "active": true,
       "filters": {

@@ -207,6 +207,12 @@ def main():
     os.environ["QTWEBENGINE_DISABLE_SANDBOX"] = "1"
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
+    app.setStyleSheet("""
+        QScrollArea { background: #0F1117; border: none; }
+        QScrollArea > QWidget { background: #0F1117; }
+        QScrollArea > QWidget > QWidget { background: #0F1117; }
+        QAbstractScrollArea { background: #0F1117; }
+    """)
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
